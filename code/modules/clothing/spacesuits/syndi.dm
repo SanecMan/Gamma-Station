@@ -5,11 +5,16 @@
 	item_state = "syndicate-helm"
 	desc = "Has a tag: Totally not property of an enemy corporation, honest."
 	armor = list(melee = 60, bullet = 35, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30, telepathy = 15)
-	actions_types = /datum/action/item_action/attack_self
+	actions_types = list(/datum/action/item_action/attack_self, /datum/action/item_action/hands_free/toggle_holomap)
 	var/brightness = 3 //light_range when on
 	var/lit = FALSE
 	species_restricted = list("exclude" , DIONA , VOX , TYCHEON)
 	var/image/lamp = null
+
+/obj/item/clothing/head/helmet/space/syndicate/atom_init()
+	. = ..()
+	holochip = new /obj/item/holochip/nuclear(src)
+	holochip.holder = src
 
 /obj/item/clothing/suit/space/syndicate
 	name = "red space suit"
@@ -95,7 +100,7 @@
 	desc = "Space helmet made by unknown manufacturer. It's made from some strange composite material."
 	icon_state = "syndicate-helm-infiltrator"
 	item_state = "syndicate-helm-elite"
-	actions_types = null
+	actions_types = /datum/action/item_action/hands_free/toggle_holomap
 
 /obj/item/clothing/suit/space/syndicate/infiltrator
 	name = "infiltrator space suit"
@@ -114,7 +119,7 @@
 	icon_state = "syndicate-helm-elite"
 	item_state = "syndicate-helm-elite"
 	armor = list(melee = 75, bullet = 65, laser = 65, energy = 65, bomb = 70, bio = 100, rad = 20, telepathy = 15)
-	actions_types = null
+	actions_types = /datum/action/item_action/hands_free/toggle_holomap
 
 /obj/item/clothing/head/helmet/space/syndicate/elite/attack_self(mob/user)
 	return
